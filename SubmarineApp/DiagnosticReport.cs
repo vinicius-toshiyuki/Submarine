@@ -41,6 +41,9 @@ namespace SubmarineApp.DiagnosticReport
         ///
         /// Diagnostic data is a collection of readings (rows) with fixed
         /// length (reading length) arrays of bits (0 or 1).
+        /// @throws ArgumentException
+        /// @throws ArgumentNullException
+        /// @throws ArgumentOutOfRangeException
         ///
         public DiagnosticData Data
         {
@@ -90,6 +93,7 @@ namespace SubmarineApp.DiagnosticReport
         ///
         /// Parses the input text into a DiagnosticData object.
         /// Only checks if the data is made of 0s and 1s.
+        /// @throws ArgumentOutOfRangeException
         ///
         public static DiagnosticData DataFromText(string text)
         {
@@ -153,6 +157,7 @@ namespace SubmarineApp.DiagnosticReport
 
         ///
         /// Energy consumption is computed by multiplying the gama rate and epsilon rate.
+        /// @throws OverflowException
         ///
         public ulong GetEnergyConsumption()
         {
