@@ -7,7 +7,7 @@ namespace SubmarineApp.DiagnosticReport
         private IEnumerable<ulong>? bitAcc;
         private int readingLength;
         private int readingCount;
-        private DiagnosticData data = Enumerable.Empty<IEnumerable<ulong>>();
+        private DiagnosticData data = Enumerable.Empty<DiagnosticDataReading>();
 
         ///
         /// This stores the sum of the bits from every reading for every position
@@ -97,18 +97,16 @@ namespace SubmarineApp.DiagnosticReport
                 .Trim()
                 .ReplaceLineEndings()
                 .Split(Environment.NewLine)
-                .AsReadOnly()
                 .Select((line) =>
                     line.Select((c, index) => (c) switch
                         {
-                            '0' => 0UL,
-                            '1' => 1UL,
+                            '0' => (byte)0,
+                            '1' => (byte)1,
                             _ => throw new ArgumentOutOfRangeException("Diagnostic bits should be 0 or 1."),
                         }
                     )
                 )
-                .ToArray()
-                .AsReadOnly();
+                .ToArray();
 
             return data;
         }
